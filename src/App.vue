@@ -12,17 +12,20 @@
             alt="logo">
       </v-btn>
       <products-list/>
+      <products-table/>
     </v-main>
   </v-app>
 </template>
 
 <script>
 import ProductsList from '@/views/Products/ProductsList';
+import ProductsTable from '@/views/Products/ProductsTable';
 
 export default {
   name: 'App',
   components: {
     ProductsList,
+    ProductsTable,
   },
 };
 </script>

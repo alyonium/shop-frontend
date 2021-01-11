@@ -11,6 +11,11 @@ export default new Vuex.Store({
   getters: {
     checkProductInCart: (state) => (productId) => state.cartProducts
       .find((cartProduct) => cartProduct?.productInfo?.id === productId),
+    finalPrice: (state) => state.cartProducts
+      .reduce((prevValue, cartProduct) => prevValue
+        + (cartProduct.productInfo.price * cartProduct.quantity), 0),
+    productInCartQuantity: (state) => (productId) => state.cartProducts
+      .find((cartProduct) => cartProduct?.productInfo?.id === productId).quantity,
   },
   mutations: {
     setProductsList(state, productsList) {
