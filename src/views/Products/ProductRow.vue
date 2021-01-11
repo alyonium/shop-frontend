@@ -51,6 +51,7 @@ export default {
   computed: {
     ...mapGetters({
       checkProductInCart: 'checkProductInCart',
+      productInCartQuantity: 'productInCartQuantity',
     }),
     ...mapState([
       'cartProducts',
@@ -66,7 +67,7 @@ export default {
       this.increaseProductInCart(this.id);
     },
     removeProduct() {
-      if (this.cartProducts.quantity > 1) {
+      if (this.productInCartQuantity(this.id) > 1) {
         this.decreaseProductInCart(this.id);
       } else {
         this.resetProduct();

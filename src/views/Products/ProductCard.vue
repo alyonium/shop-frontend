@@ -33,7 +33,7 @@
               <span>{{ price }}$</span>
             </v-list-item>
             <v-list-item
-              v-if="isAdded">
+              v-if="quantity !== 0">
               <span>In cart: {{ quantity }}</span>
             </v-list-item>
           </v-col>
@@ -51,13 +51,13 @@
               </v-btn>
               <v-btn
                 small
-                :disabled="!isAdded"
+                :disabled="quantity === 0"
                 @click="removeProduct">
                 -
               </v-btn>
               <v-btn
                 small
-                :disabled="!isAdded"
+                :disabled="quantity === 0"
                 @click="resetProduct">
                 x
               </v-btn>
@@ -79,12 +79,6 @@ export default {
     title: String,
     price: Number,
   },
-  data() {
-    return {
-      isAdded: false,
-      quantity: 0,
-    };
-  },
   computed: {
     ...mapGetters({
       checkProductInCart: 'checkProductInCart',
@@ -93,6 +87,9 @@ export default {
     ...mapState([
       'cartProducts',
     ]),
+    quantity() {
+      return this.productInCartQuantity(this.id);
+    },
   },
   methods: {
     ...mapMutations({
@@ -115,22 +112,17 @@ export default {
           quantity: 1,
         });
       }
-      this.quantity = this.productInCartQuantity(this.id);
-      this.isAdded = true;
     },
     removeProduct() {
-      if (this.quantity > 1) {
+      if (this.productInCartQuantity(this.id) > 1) {
         this.decreaseProductInCart(this.id);
-        this.quantity = this.productInCartQuantity(this.id);
       } else {
         this.resetProduct();
       }
     },
     resetProduct() {
-      this.quantity = 0;
       const indexOfRemoveProduct = this.cartProducts.indexOf(this.checkProductInCart(this.id));
       this.removeProductFromCart(indexOfRemoveProduct);
-      this.isAdded = false;
     },
   },
 };
