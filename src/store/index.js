@@ -35,6 +35,9 @@ export default new Vuex.Store({
       state.cartProducts
         .find((cartProduct) => cartProduct.productInfo.id === productId).quantity -= 1;
     },
+    resetCartProducts(state) {
+      state.cartProducts.splice(0, state.cartProducts.length);
+    },
   },
   actions: {
     async getProductList(context) {

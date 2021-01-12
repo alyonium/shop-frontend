@@ -11,21 +11,28 @@
             src="../src/assets/logo.png"
             alt="logo">
       </v-btn>
+      <cart/>
       <products-list/>
-      <products-table/>
+<!--      <products-table/>-->
     </v-main>
   </v-app>
 </template>
 
 <script>
 import ProductsList from '@/views/Products/ProductsList';
-import ProductsTable from '@/views/Products/ProductsTable';
+import Cart from '@/components/Cart';
 
 export default {
   name: 'App',
   components: {
     ProductsList,
-    ProductsTable,
+    Cart,
   },
 };
 </script>
+
+<style lang="scss">
+.v-card {
+  background-color: #ffccbc !important;
+}
+</style>

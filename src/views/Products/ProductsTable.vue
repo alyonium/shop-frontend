@@ -30,13 +30,13 @@
         <td
           colspan="3"
           style="font-size: 1.2em"
-          class="text-center grey darken-3">
-          Price
+          class="text-center deep-orange lighten-4">
+          Total price
         </td>
         <td
           style="font-size: 1.2em"
-          class="text-center grey darken-2 font-weight-bold">
-          {{ finalPrice }}
+          class="text-center deep-orange lighten-4 font-weight-bold">
+          {{ finalPrice }}$
         </td>
       </tr>
       </tbody>
@@ -73,5 +73,13 @@ export default {
 </script>
 
 <style scoped>
-
+table {
+  width: 100%;
+}
+tr:nth-child(odd) {
+  background-color: #fbe9e7;
+}
+thead > tr {
+   background-color: unset !important;
+ }
 </style>

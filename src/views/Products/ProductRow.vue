@@ -1,9 +1,9 @@
 <template>
   <tr>
-    <td class="text-center">
+    <td class="d-flex align-center justify-center">
       <img
-        width="30"
-        height="30"
+        width="40"
+        height="40"
         :src="image"
         :alt="title">
     </td>
