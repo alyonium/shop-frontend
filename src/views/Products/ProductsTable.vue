@@ -22,6 +22,7 @@
         v-for="product in cartProducts"
         :key="product.productInfo.id"
         :id="product.productInfo.id"
+        :title="product.productInfo.title"
         :image="product.productInfo.image"
         :price="product.productInfo.price"
         :quantity="product.quantity"

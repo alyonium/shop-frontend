@@ -1,9 +1,10 @@
 <template>
   <v-app>
     <v-main>
+      <router-link to="/">
       <v-btn
         fab
-        class="ml-5 mt-5 v-btn--fixed"
+        class="ml-sm-5 mt-sm-5 ml-1 mt-2 v-btn--fixed"
       >
           <img
             width="40"
@@ -11,22 +12,26 @@
             src="../src/assets/logo.png"
             alt="logo">
       </v-btn>
-      <cart/>
-      <products-list/>
-<!--      <products-table/>-->
+      </router-link>
+      <cart v-if="isCartButton"/>
+      <router-view/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import ProductsList from '@/views/Products/ProductsList';
 import Cart from '@/components/Cart';
+import { mapState } from 'vuex';
 
 export default {
   name: 'App',
   components: {
-    ProductsList,
     Cart,
+  },
+  computed: {
+    ...mapState([
+      'isCartButton',
+    ]),
   },
 };
 </script>
@@ -34,5 +39,8 @@ export default {
 <style lang="scss">
 .v-card {
   background-color: #ffccbc !important;
+}
+a {
+  text-decoration: none;
 }
 </style>

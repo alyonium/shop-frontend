@@ -4,7 +4,7 @@
       v-if="finalPrice"
       @click.stop="drawer = !drawer"
       fab
-      class="mr-5 mt-5 v-btn--fixed cart-button"
+      class="mr-sm-5 mt-sm-5 mr-1 mt-2 v-btn--fixed cart-button"
     >
       <img
         width="40"
@@ -26,26 +26,26 @@
         class="ml-2 mt-2 font-weight-bold"
         @click="drawer = !drawer"
       >
-      Back
+      close
       </v-btn>
         <v-list-item
         class="justify-center">
           <h2>Cart</h2>
         </v-list-item>
-
-      <v-divider></v-divider>
-
       <v-list
         v-if="finalPrice"
         class="pt-0">
         <products-table/>
         <v-item-group
           class="d-flex justify-center mt-5">
-          <v-btn
-            class="ml-2 mr-2"
-          >
-            Buy
-          </v-btn>
+          <router-link to="/checkout">
+            <v-btn
+              class="ml-2 mr-2"
+              @click="buyProducts"
+            >
+              Buy
+            </v-btn>
+          </router-link>
           <v-btn
             class="ml-2 mr-2"
             color="deep-orange lighten-2"
@@ -76,7 +76,6 @@ export default {
   data() {
     return {
       drawer: false,
-      isEmpty: true,
     };
   },
   computed: {
@@ -90,10 +89,13 @@ export default {
   methods: {
     ...mapMutations({
       resetCartProducts: 'resetCartProducts',
+      showCartButton: 'showCartButton',
     }),
     resetCart() {
       this.resetCartProducts();
-      this.isEmpty = true;
+    },
+    buyProducts() {
+      this.drawer = !this.drawer;
     },
   },
 };
@@ -101,8 +103,8 @@ export default {
 
 <style scoped lang="scss">
 .cart-button {
-  position: fixed;
   right: 0;
+  position: fixed;
 }
 .empty-message {
   height: calc(100vh - 80px);

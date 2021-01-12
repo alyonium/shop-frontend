@@ -9,11 +9,11 @@ const routes = [
     name: 'ProductsList',
     component: () => import('../views/Products/ProductsList.vue'),
   },
-  // {
-  //   path: '/checkout',
-  //   name: 'checkout',
-  //   component: () => import('../views/Checkout/Checkout.vue'),
-  // },
+  {
+    path: '/checkout',
+    name: 'checkout',
+    component: () => import('../views/Checkout/Checkout.vue'),
+  },
 ];
 
 const router = new VueRouter({

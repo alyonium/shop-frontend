@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     products: [],
     cartProducts: [],
+    isCartButton: true,
   },
   getters: {
     checkProductInCart: (state) => (productId) => state.cartProducts
@@ -37,6 +38,12 @@ export default new Vuex.Store({
     },
     resetCartProducts(state) {
       state.cartProducts.splice(0, state.cartProducts.length);
+    },
+    showCartButton(state) {
+      state.isCartButton = true;
+    },
+    dontShowCartButton(state) {
+      state.isCartButton = false;
     },
   },
   actions: {

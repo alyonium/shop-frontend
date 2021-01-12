@@ -21,7 +21,7 @@
 
 <script>
 import ProductCard from '@/views/Products/ProductCard';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'ProductsList',
@@ -30,6 +30,7 @@ export default {
   },
   mounted() {
     this.getProductList();
+    this.showCartButton();
   },
   computed: {
     ...mapState([
@@ -39,6 +40,9 @@ export default {
   methods: {
     ...mapActions({
       getProductList: 'getProductList',
+    }),
+    ...mapMutations({
+      showCartButton: 'showCartButton',
     }),
   },
 };

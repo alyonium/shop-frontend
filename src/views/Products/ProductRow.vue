@@ -1,11 +1,11 @@
 <template>
   <tr>
-    <td class="d-flex align-center justify-center">
+    <td class="text-center">
       <img
-        width="40"
-        height="40"
+        width="50"
+        height="50"
         :src="image"
-        :alt="title">
+        :alt="title"/>
     </td>
     <td
       class="text-center">
@@ -16,19 +16,19 @@
       {{ quantity }}
     </td>
     <td
-      class="text-center">
+      class="text-center d-sm-table-cell d-flex flex-column align-center">
       <v-btn
-        class="ml-2 mr-2"
+        class="ml-sm-2 mr-sm-2 mr-0 ml-0"
         @click="addProduct">
         +
       </v-btn>
       <v-btn
-        class="ml-2 mr-2"
+        class="ml-sm-2 mr-sm-2 mt-sm-0 mr-0 ml-0 mt-2"
         @click="removeProduct">
         -
       </v-btn>
       <v-btn
-        class="ml-2 mr-2"
+        class="ml-sm-2 mr-sm-2 mt-sm-0 mr-0 ml-0 mt-2"
         @click="resetProduct">
         x
       </v-btn>
@@ -84,5 +84,20 @@ export default {
 <style scoped>
 img {
   object-fit: cover;
+  margin-top: 4px;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+  padding: 8px;
+}
+
+@media (max-width: 601px) and (min-width: 300px) {
+  td {
+    height: 100% !important;
+  }
+
+  button {
+    width: 64px !important;
+  }
 }
 </style>
