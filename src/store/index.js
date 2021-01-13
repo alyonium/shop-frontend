@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
@@ -17,6 +18,10 @@ export default new Vuex.Store({
         + (cartProduct.productInfo.price * cartProduct.quantity), 0),
     productInCartQuantity: (state) => (productId) => state.cartProducts
       .find((cartProduct) => cartProduct?.productInfo?.id === productId)?.quantity || 0,
+    orderProducts: (state) => state.cartProducts.map((product) => ({
+      title: product.productInfo.title,
+      quantity: product.quantity,
+    })),
   },
   mutations: {
     setProductsList(state, productsList) {
@@ -51,5 +56,14 @@ export default new Vuex.Store({
       const res = await Vue.axios.get('/getProductsList');
       context.commit('setProductsList', res.data);
     },
+    async makeOrder({ getters }) {
+      const date = Date.now();
+      await Vue.axios.post('/makeOrder', {
+        summary: getters.finalPrice,
+        date,
+        product: getters.orderProducts,
+      });
+    },
   },
+  plugins: [createPersistedState()],
 });

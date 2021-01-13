@@ -43,7 +43,7 @@
               class="ml-2 mr-2"
               @click="buyProducts"
             >
-              Buy
+              Checkout
             </v-btn>
           </router-link>
           <v-btn

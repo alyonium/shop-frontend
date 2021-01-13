@@ -7,9 +7,13 @@
         <h1>Checkout</h1>
       </v-col>
     </v-row>
+    <v-list v-if="isBuy">
+      <v-row>
+        <order-window/>
+      </v-row>
+    </v-list>
     <v-list v-if="finalPrice">
       <v-row>
-        <order-window v-if="isBuy"/>
         <products-table/>
       </v-row>
       <v-row
@@ -17,7 +21,7 @@
         <router-link to="/checkout">
           <v-btn
             class="ml-2 mr-2"
-            @click="makeOrder"
+            @click="buyProducts"
           >
             Buy
           </v-btn>
@@ -42,7 +46,7 @@
 <script>
 import ProductsTable from '@/views/Products/ProductsTable';
 import OrderWindow from '@/components/OrderWindow';
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   name: 'Checkout',
@@ -68,11 +72,16 @@ export default {
       dontShowCartButton: 'dontShowCartButton',
       resetCartProducts: 'resetCartProducts',
     }),
+    ...mapActions({
+      makeOrder: 'makeOrder',
+    }),
     resetCart() {
       this.resetCartProducts();
     },
-    makeOrder() {
+    async buyProducts() {
+      await this.makeOrder();
       this.isBuy = true;
+      this.resetCart();
     },
   },
 };

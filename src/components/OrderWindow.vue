@@ -1,6 +1,8 @@
 <template>
-  <v-dialog v-model="dialog">
+  <v-dialog v-model="dialog"
+  width="500">
   <v-card>
+    <router-link to="/">
     <v-btn
       x-small
       text
@@ -10,6 +12,7 @@
     >
       close
     </v-btn>
+    </router-link>
     <v-card-title
       class="headline text-center justify-center d-flex pb-10">
       Thank you for your order!

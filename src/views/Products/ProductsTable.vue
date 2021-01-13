@@ -1,5 +1,6 @@
 <template>
-  <v-simple-table>
+  <v-simple-table
+    fixed-header>
     <template v-slot:default>
       <thead>
       <tr>
@@ -82,5 +83,5 @@ tr:nth-child(odd) {
 }
 thead > tr {
    background-color: unset !important;
- }
+}
 </style>
