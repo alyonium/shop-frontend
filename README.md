@@ -1,1 +1,1 @@
-https://alyonium.github.io/shop-frontend/
+https://alyonium.github.io/shop-frontend/ 🥝
