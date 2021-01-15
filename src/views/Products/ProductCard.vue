@@ -81,7 +81,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      checkProductInCart: 'checkProductInCart',
+      findProductInCart: 'findProductInCart',
       productInCartQuantity: 'productInCartQuantity',
     }),
     ...mapState([
@@ -99,7 +99,7 @@ export default {
       decreaseProductInCart: 'decreaseProductInCart',
     }),
     addProduct() {
-      if (this.checkProductInCart(this.id)) {
+      if (this.findProductInCart(this.id)) {
         this.increaseProductInCart(this.id);
       } else {
         this.addNewProductToCart({
@@ -121,8 +121,7 @@ export default {
       }
     },
     resetProduct() {
-      const indexOfRemoveProduct = this.cartProducts.indexOf(this.checkProductInCart(this.id));
-      this.removeProductFromCart(indexOfRemoveProduct);
+      this.removeProductFromCart(this.id);
     },
   },
 };

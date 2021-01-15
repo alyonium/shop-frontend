@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      checkProductInCart: 'checkProductInCart',
+      findProductInCart: 'findProductInCart',
       productInCartQuantity: 'productInCartQuantity',
     }),
     ...mapState([
@@ -74,8 +74,7 @@ export default {
       }
     },
     resetProduct() {
-      const indexOfRemoveProduct = this.cartProducts.indexOf(this.checkProductInCart(this.id));
-      this.removeProductFromCart(indexOfRemoveProduct);
+      this.removeProductFromCart(this.id);
     },
   },
 };

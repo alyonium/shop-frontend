@@ -11,13 +11,13 @@ export default new Vuex.Store({
     isCartButton: true,
   },
   getters: {
-    checkProductInCart: (state) => (productId) => state.cartProducts
-      .find((cartProduct) => cartProduct?.productInfo?.id === productId),
+    findProductInCart: (state) => (productId) => state.cartProducts
+      .find((cartProduct) => cartProduct.productInfo.id === productId),
     finalPrice: (state) => state.cartProducts
       .reduce((prevValue, cartProduct) => prevValue
         + (cartProduct.productInfo.price * cartProduct.quantity), 0),
     productInCartQuantity: (state) => (productId) => state.cartProducts
-      .find((cartProduct) => cartProduct?.productInfo?.id === productId)?.quantity || 0,
+      .find((cartProduct) => cartProduct.productInfo.id === productId)?.quantity || 0,
     orderProducts: (state) => state.cartProducts.map((product) => ({
       title: product.productInfo.title,
       quantity: product.quantity,
@@ -30,7 +30,8 @@ export default new Vuex.Store({
     addNewProductToCart(state, product) {
       state.cartProducts.push(product);
     },
-    removeProductFromCart(state, productIndex) {
+    removeProductFromCart(state, productId) {
+      const productIndex = state.cartProducts.indexOf(productId);
       state.cartProducts.splice(productIndex, 1);
     },
     increaseProductInCart(state, productId) {
@@ -64,6 +65,7 @@ export default new Vuex.Store({
         product: getters.orderProducts,
       });
     },
+
   },
   plugins: [createPersistedState()],
 });
