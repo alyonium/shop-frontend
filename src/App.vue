@@ -21,7 +21,6 @@
 
 <script>
 import Cart from '@/components/Cart';
-import { mapState } from 'vuex';
 
 export default {
   name: 'App',
@@ -29,9 +28,7 @@ export default {
     Cart,
   },
   computed: {
-    ...mapState([
-      'isCartButton',
-    ]),
+    isCartButton() { return this.$route.path !== '/checkout'; },
   },
 };
 </script>

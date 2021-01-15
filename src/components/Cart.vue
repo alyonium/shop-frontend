@@ -89,7 +89,6 @@ export default {
   methods: {
     ...mapMutations({
       resetCartProducts: 'resetCartProducts',
-      showCartButton: 'showCartButton',
     }),
     resetCart() {
       this.resetCartProducts();

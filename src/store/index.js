@@ -8,7 +8,6 @@ export default new Vuex.Store({
   state: {
     products: [],
     cartProducts: [],
-    isCartButton: true,
   },
   getters: {
     findProductInCart: (state) => (productId) => state.cartProducts
@@ -18,10 +17,6 @@ export default new Vuex.Store({
         + (cartProduct.productInfo.price * cartProduct.quantity), 0),
     productInCartQuantity: (state) => (productId) => state.cartProducts
       .find((cartProduct) => cartProduct.productInfo.id === productId)?.quantity || 0,
-    orderProducts: (state) => state.cartProducts.map((product) => ({
-      title: product.productInfo.title,
-      quantity: product.quantity,
-    })),
   },
   mutations: {
     setProductsList(state, productsList) {
@@ -31,7 +26,8 @@ export default new Vuex.Store({
       state.cartProducts.push(product);
     },
     removeProductFromCart(state, productId) {
-      const productIndex = state.cartProducts.indexOf(productId);
+      const productIndex = state.cartProducts
+        .findIndex((product) => product.productInfo.id === productId);
       state.cartProducts.splice(productIndex, 1);
     },
     increaseProductInCart(state, productId) {
@@ -45,24 +41,21 @@ export default new Vuex.Store({
     resetCartProducts(state) {
       state.cartProducts.splice(0, state.cartProducts.length);
     },
-    showCartButton(state) {
-      state.isCartButton = true;
-    },
-    dontShowCartButton(state) {
-      state.isCartButton = false;
-    },
   },
   actions: {
-    async getProductList(context) {
+    async getProductList({ commit }) {
       const res = await Vue.axios.get('/getProductsList');
-      context.commit('setProductsList', res.data);
+      commit('setProductsList', res.data);
     },
-    async makeOrder({ getters }) {
+    async makeOrder({ state, getters }) {
       const date = Date.now();
       await Vue.axios.post('/makeOrder', {
         summary: getters.finalPrice,
         date,
-        product: getters.orderProducts,
+        product: state.cartProducts.map((product) => ({
+          title: product.productInfo.title,
+          quantity: product.quantity,
+        })),
       });
     },
 

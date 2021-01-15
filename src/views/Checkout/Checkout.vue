@@ -59,9 +59,6 @@ export default {
       isBuy: false,
     };
   },
-  mounted() {
-    this.dontShowCartButton();
-  },
   computed: {
     ...mapGetters([
       'finalPrice',
@@ -69,7 +66,6 @@ export default {
   },
   methods: {
     ...mapMutations({
-      dontShowCartButton: 'dontShowCartButton',
       resetCartProducts: 'resetCartProducts',
     }),
     ...mapActions({

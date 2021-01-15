@@ -121,6 +121,7 @@ export default {
       }
     },
     resetProduct() {
+      console.log(this.title);
       this.removeProductFromCart(this.id);
     },
   },
