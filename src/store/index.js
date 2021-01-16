@@ -25,7 +25,7 @@ const store = new Vuex.Store({
         this.replaceState(
           Object.assign(state, JSON.parse(localStorage.getItem('store'))),
         );
-        if (store.version === version) {
+        if (state.version === version) {
           this.replaceState(
             Object.assign(state, store),
           );
