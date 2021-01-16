@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { version } from '../../package.json';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
+    version: '',
     products: [],
     cartProducts: [],
   },
@@ -23,6 +25,13 @@ const store = new Vuex.Store({
         this.replaceState(
           Object.assign(state, JSON.parse(localStorage.getItem('store'))),
         );
+        if (store.version === version) {
+          this.replaceState(
+            Object.assign(state, store),
+          );
+        } else {
+          state.version = version;
+        }
       }
     },
     setProductsList(state, productsList) {
