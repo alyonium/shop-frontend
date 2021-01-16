@@ -1,10 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     products: [],
     cartProducts: [],
@@ -19,6 +18,13 @@ export default new Vuex.Store({
       .find((cartProduct) => cartProduct.productInfo.id === productId)?.quantity || 0,
   },
   mutations: {
+    initialiseStore(state) {
+      if (localStorage.getItem('store')) {
+        this.replaceState(
+          Object.assign(state, JSON.parse(localStorage.getItem('store'))),
+        );
+      }
+    },
     setProductsList(state, productsList) {
       state.products = [...productsList];
     },
@@ -58,7 +64,11 @@ export default new Vuex.Store({
         })),
       });
     },
-
   },
-  plugins: [createPersistedState()],
 });
+
+store.subscribe((mutation, state) => {
+  localStorage.setItem('store', JSON.stringify(state));
+});
+
+export default store;

@@ -30,6 +30,9 @@ export default {
   computed: {
     isCartButton() { return this.$route.path !== '/checkout'; },
   },
+  beforeCreate() {
+    this.$store.commit('initialiseStore');
+  },
 };
 </script>
 
