@@ -11,12 +11,12 @@ const store = new Vuex.Store({
     cartProducts: [],
   },
   getters: {
-    findProductInCart: (state) => (productId) => state.cartProducts
+    getProductInCart: (state) => (productId) => state.cartProducts
       .find((cartProduct) => cartProduct.productInfo.id === productId),
-    finalPrice: (state) => state.cartProducts
+    getFinalPrice: (state) => state.cartProducts
       .reduce((prevValue, cartProduct) => prevValue
         + (cartProduct.productInfo.price * cartProduct.quantity), 0),
-    productInCartQuantity: (state) => (productId) => state.cartProducts
+    getProductInCartQuantity: (state) => (productId) => state.cartProducts
       .find((cartProduct) => cartProduct.productInfo.id === productId)?.quantity || 0,
   },
   mutations: {
@@ -34,7 +34,7 @@ const store = new Vuex.Store({
         }
       }
     },
-    setProductsList(state, productsList) {
+    setProducts(state, productsList) {
       state.products = [...productsList];
     },
     addNewProductToCart(state, product) {
@@ -58,14 +58,14 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    async getProductList({ commit }) {
+    async setProductList({ commit }) {
       const res = await Vue.axios.get('/getProductsList');
-      commit('setProductsList', res.data);
+      commit('setProducts', res.data);
     },
     async makeOrder({ state, getters }) {
       const date = Date.now();
       await Vue.axios.post('/makeOrder', {
-        summary: getters.finalPrice,
+        summary: getters.getFinalPrice,
         date,
         product: state.cartProducts.map((product) => ({
           title: product.productInfo.title,

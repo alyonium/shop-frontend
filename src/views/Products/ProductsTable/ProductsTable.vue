@@ -38,7 +38,7 @@
         <td
           style="font-size: 1.2em"
           class="text-center deep-orange lighten-4 font-weight-bold">
-          {{ finalPrice }}$
+          {{ getFinalPrice }}$
         </td>
       </tr>
       </tbody>
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import ProductRow from '@/views/Products/ProductRow';
+import ProductRow from '@/views/Products/ProductsTable/ProductRow';
 import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -56,19 +56,19 @@ export default {
     ProductRow,
   },
   mounted() {
-    this.getProductList();
+    this.setProductList();
   },
   computed: {
     ...mapState([
       'cartProducts',
     ]),
     ...mapGetters([
-      'finalPrice',
+      'getFinalPrice',
     ]),
   },
   methods: {
     ...mapActions({
-      getProductList: 'getProductList',
+      setProductList: 'setProductList',
     }),
   },
 };

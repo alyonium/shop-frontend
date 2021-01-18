@@ -29,7 +29,7 @@ export default {
     ProductCard,
   },
   mounted() {
-    this.getProductList();
+    this.setProductList();
   },
   computed: {
     ...mapState([
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      getProductList: 'getProductList',
+      setProductList: 'setProductList',
     }),
   },
 };

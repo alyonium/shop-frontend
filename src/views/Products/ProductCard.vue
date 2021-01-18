@@ -81,14 +81,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      findProductInCart: 'findProductInCart',
-      productInCartQuantity: 'productInCartQuantity',
+      getProductInCart: 'getProductInCart',
+      getProductInCartQuantity: 'getProductInCartQuantity',
     }),
     ...mapState([
       'cartProducts',
     ]),
     quantity() {
-      return this.productInCartQuantity(this.id);
+      return this.getProductInCartQuantity(this.id);
     },
   },
   methods: {
@@ -99,7 +99,7 @@ export default {
       decreaseProductInCart: 'decreaseProductInCart',
     }),
     addProduct() {
-      if (this.findProductInCart(this.id)) {
+      if (this.getProductInCart(this.id)) {
         this.increaseProductInCart(this.id);
       } else {
         this.addNewProductToCart({
@@ -114,7 +114,7 @@ export default {
       }
     },
     removeProduct() {
-      if (this.productInCartQuantity(this.id) > 1) {
+      if (this.getProductInCartQuantity(this.id) > 1) {
         this.decreaseProductInCart(this.id);
       } else {
         this.resetProduct();

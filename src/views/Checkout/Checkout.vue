@@ -12,7 +12,7 @@
         <order-window/>
       </v-row>
     </v-list>
-    <v-list v-if="finalPrice">
+    <v-list v-if="getFinalPrice">
       <v-row>
         <products-table/>
       </v-row>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import ProductsTable from '@/views/Products/ProductsTable';
+import ProductsTable from '@/views/Products/ProductsTable/ProductsTable';
 import OrderWindow from '@/components/OrderWindow';
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 
@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'finalPrice',
+      'getFinalPrice',
     ]),
   },
   methods: {

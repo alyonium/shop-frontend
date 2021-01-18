@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-btn
-      v-if="finalPrice"
+      v-if="getFinalPrice"
       @click.stop="drawer = !drawer"
       fab
       class="mr-sm-5 mt-sm-5 mr-1 mt-2 v-btn--fixed cart-button"
@@ -33,7 +33,7 @@
           <h2>Cart</h2>
         </v-list-item>
       <v-list
-        v-if="finalPrice"
+        v-if="getFinalPrice"
         class="pt-0">
         <products-table/>
         <v-item-group
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import ProductsTable from '@/views/Products/ProductsTable';
+import ProductsTable from '@/views/Products/ProductsTable/ProductsTable';
 import { mapGetters, mapMutations, mapState } from 'vuex';
 
 export default {
@@ -83,7 +83,7 @@ export default {
       'cartProducts',
     ]),
     ...mapGetters([
-      'finalPrice',
+      'getFinalPrice',
     ]),
   },
   methods: {
